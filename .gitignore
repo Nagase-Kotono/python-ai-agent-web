@@ -170,5 +170,8 @@ cython_debug/
 # Ruff stuff:
 .ruff_cache/
 
+# Apple
+.DS_Store
+
 # PyPI configuration file
 .pypirc
