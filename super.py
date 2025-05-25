@@ -1,4 +1,5 @@
 import asyncio
+import os
 from typing import Annotated, Dict, List, Any
 from typing_extensions import TypedDict
 from dotenv import load_dotenv
@@ -583,8 +584,19 @@ def create_analysis_prompt(user_query: str, results: Dict[str, List]) -> str:
 
 # ===== 그래프 생성 함수 =====
 def create_multi_agent_graph(client):
+    # 환경변수에서 LLM 설정 가져오기
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4.1-2025-04-14")  # 기본값 설정
+    temperature = float(os.getenv("OPENAI_TEMPERATURE", "0"))
+    max_tokens = int(os.getenv("OPENAI_MAX_TOKENS", "20000"))
+    
     # LLM 설정
-    llm = ChatOpenAI(model="gpt-4.1-2025-04-14", temperature=0, max_tokens=20000)
+    llm = ChatOpenAI(
+        model=model_name,
+        temperature=temperature,
+        max_tokens=max_tokens
+    )
+    
+    log_info(f"🤖 사용 중인 모델: {model_name}", "green")
     
     # 노드 생성
     search_node = create_search_node(client)
