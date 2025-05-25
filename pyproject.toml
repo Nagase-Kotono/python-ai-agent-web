@@ -15,6 +15,7 @@ dependencies = [
     "langchain-voyageai>=0.1.5",
     "langgraph>=0.4.3",
     "python-dotenv>=1.1.0",
+    "rich>=14.0.0",
     "streamlit>=1.45.1",
 ]
 
